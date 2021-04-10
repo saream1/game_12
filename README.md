@@ -1,2 +1,1 @@
-do you use cryptocurrency? what if we send you usdt?
-Nope, I would like to get paid the proper way... Either via Fiverr or directly. I can give you the data.
+directly means to your euro bank account? we can also send you in fiverr? whatever you like?
