@@ -4,11 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class UI {
     
@@ -19,11 +22,17 @@ public class UI {
     private Batch UIbatch;
     private BitmapFont font;
     
+    public static int UI_WIDTH = 1600;
+    public static int UI_HEIGHT = 900;
     
+    private Stage stage = new Stage(new FitViewport(1600,900, new OrthographicCamera()));
 
     public UI() {
         UIrenderer = new ShapeRenderer();
         UIbatch = new SpriteBatch();
+        
+        UIbatch = stage.getBatch();
+        UIrenderer.setProjectionMatrix(stage.getCamera().combined);
         
         // generating the font
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
@@ -52,17 +61,18 @@ public class UI {
     
     public void render(){
         
+        
         // RENDERING MONEY BOX /////////////////////////////////////////////////
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         getUIrenderer().begin(ShapeRenderer.ShapeType.Filled);
         getUIrenderer().setColor(0,0,0,0.8f);
-        getUIrenderer().rect(Gdx.graphics.getWidth()-300, Gdx.graphics.getHeight()-100, 250, 70);
+        getUIrenderer().rect(UI_WIDTH-300, UI_HEIGHT-100, 250, 70);
         getUIrenderer().end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
         getUIbatch().begin();
         getFont().setColor(Color.WHITE);
-        getFont().draw(getUIbatch(), Player.money+" $", Gdx.graphics.getWidth()-280, Gdx.graphics.getHeight()-65, 210, 1, false);
+        getFont().draw(getUIbatch(), Player.money+" $", UI_WIDTH-280, UI_HEIGHT-65, 210, 1, false);
         getUIbatch().end();
         getUIrenderer().begin(ShapeRenderer.ShapeType.Filled);
         ////////////////////////////////////////////////////////////////////////
@@ -70,11 +80,11 @@ public class UI {
         // RENDERING BUILDINGS UI //////////////////////////////////////////////
         getUIrenderer().setColor(Color.WHITE);
         for(int i = 0; i < mapElements.length; i++){
-            getUIrenderer().rect(20, Gdx.graphics.getHeight() - 80 - i*72-8, 72, 72);
+            getUIrenderer().rect(20, UI_HEIGHT - 80 - i*72-8, 72, 72);
         }
         if(selectedBuilding != -1){
             getUIrenderer().setColor(Color.RED);
-            getUIrenderer().rect(20, Gdx.graphics.getHeight() - 80 - selectedBuilding*72-8, 72, 72);
+            getUIrenderer().rect(20, UI_HEIGHT - 80 - selectedBuilding*72-8, 72, 72);
             
             getUIrenderer().end();
             getUIbatch().begin();
@@ -87,8 +97,8 @@ public class UI {
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             getUIrenderer().begin(ShapeRenderer.ShapeType.Filled);
             getUIrenderer().setColor(0,0,0, 0.5f);
-            getUIrenderer().rect(92, Gdx.graphics.getHeight() - 80 - selectedBuilding*72-8, width+7, 72);
-            getUIrenderer().rect(90+width+5-priceWidth, Gdx.graphics.getHeight() - 80 - (selectedBuilding+1)*72-8, priceWidth+4, 72);
+            getUIrenderer().rect(92, UI_HEIGHT - 80 - selectedBuilding*72-8, width+7, 72);
+            getUIrenderer().rect(90+width+5-priceWidth, UI_HEIGHT - 80 - (selectedBuilding+1)*72-8, priceWidth+4, 72);
             getUIrenderer().end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
             getUIrenderer().setColor(Color.WHITE);
@@ -96,8 +106,8 @@ public class UI {
             
             getUIbatch().begin();
             getFont().setColor(Color.WHITE);
-            getFont().draw(getUIbatch(), mapElements[selectedBuilding].getName(), 96, Gdx.graphics.getHeight() - 80 - selectedBuilding*72+40, width, 1, false);
-            getFont().draw(getUIbatch(), mapElements[selectedBuilding].getBuildingCost()+" $", 92+width+5-priceWidth, Gdx.graphics.getHeight() - 80 - (selectedBuilding+1)*72+40, priceWidth, 1, false);
+            getFont().draw(getUIbatch(), mapElements[selectedBuilding].getName(), 96, UI_HEIGHT - 80 - selectedBuilding*72+40, width, 1, false);
+            getFont().draw(getUIbatch(), mapElements[selectedBuilding].getBuildingCost()+" $", 92+width+5-priceWidth, UI_HEIGHT - 80 - (selectedBuilding+1)*72+40, priceWidth, 1, false);
             
             getUIbatch().end();
             getUIrenderer().begin(ShapeRenderer.ShapeType.Filled);
@@ -106,7 +116,7 @@ public class UI {
         getUIbatch().begin();
         
         for(int i = 0; i < mapElements.length; i++){
-            mapElements[i].renderScaled(0, getUIbatch(), 24, Gdx.graphics.getHeight() - 80 - i*72-4, 2f);
+            mapElements[i].renderScaled(0, getUIbatch(), 24, UI_HEIGHT - 80 - i*72-4, 2f);
         }
         
         getUIbatch().end(); 
