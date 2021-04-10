@@ -30,10 +30,10 @@ public class World {
     public static int currentResolution = 5;
     
     // Activate, deactive rendering the Grid borders | TAB
-    public static boolean renderGrid = true;
+    public static boolean renderGrid = false;
     
-    public static int TILE_WIDTH = 48;
-    public static int TILE_HEIGHT = 48;
+    public static int TILE_WIDTH = 32;
+    public static int TILE_HEIGHT = 32;
     
 
     public World(int tileAmountX, int tileAmountY) {
@@ -161,17 +161,19 @@ public class World {
     // Tries to place the selected building on the grid
         // if there is space and the player has enough money
     public void placeInGrid(MapElement me, int x, int y){
-        if(Player.money >= me.getBuildingCost()){
-            if(me instanceof NullElement){
-                if(!(grid[x][y] instanceof NullElement)){
-                    getGrid()[x][y] = me;
-                    Player.money -= me.getBuildingCost();
+        if(x >= 0 && x < getGrid().length && y >= 0 && y < getGrid()[0].length){
+            if(Player.money >= me.getBuildingCost()){
+                if(me instanceof NullElement){
+                    if(!(grid[x][y] instanceof NullElement)){
+                        getGrid()[x][y] = me;
+                        Player.money -= me.getBuildingCost();
+                    }
                 }
-            }
-            else{
-                if(getGrid()[x][y] instanceof NullElement){
-                    getGrid()[x][y] = me;
-                    Player.money -= me.getBuildingCost();
+                else{
+                    if(getGrid()[x][y] instanceof NullElement){
+                        getGrid()[x][y] = me;
+                        Player.money -= me.getBuildingCost();
+                    }
                 }
             }
         }
