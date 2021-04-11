@@ -29,7 +29,6 @@ public class UI {
 
     public UI() {
         UIrenderer = new ShapeRenderer();
-        UIbatch = new SpriteBatch();
         
         UIbatch = stage.getBatch();
         UIrenderer.setProjectionMatrix(stage.getCamera().combined);
