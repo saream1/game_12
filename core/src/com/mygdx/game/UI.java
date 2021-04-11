@@ -25,7 +25,7 @@ public class UI {
     public static int UI_WIDTH = 1600;
     public static int UI_HEIGHT = 900;
     
-    private Stage stage = new Stage(new FitViewport(1600,900, new OrthographicCamera()));
+    private Stage stage = new Stage(new FitViewport(UI_WIDTH,UI_HEIGHT, new OrthographicCamera()));
 
     public UI() {
         UIrenderer = new ShapeRenderer();
@@ -59,7 +59,9 @@ public class UI {
     }
     
     public void render(){
-        
+        stage.getCamera().update();
+        UIrenderer.setProjectionMatrix(stage.getCamera().combined);
+        stage.getBatch().setProjectionMatrix(stage.getCamera().combined);
         
         // RENDERING MONEY BOX /////////////////////////////////////////////////
         Gdx.gl.glEnable(GL20.GL_BLEND);
@@ -158,6 +160,12 @@ public class UI {
         ////////////////////////////////////////////////////////////////////////
         
     }
+    
+    public void resize(int width, int height){
+        stage.getViewport().update(width, height);
+    }
+    
+    
     
     // Handling the scrolling through the buildings
     public void scroll(float amountX, float amountY){

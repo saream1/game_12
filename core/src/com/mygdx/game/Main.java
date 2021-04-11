@@ -38,10 +38,12 @@ public class Main extends ApplicationAdapter implements InputProcessor{
                 // We outsourced that to the Objects themself (except of scroll)
             Gdx.input.setInputProcessor(this);
         }
-
+        
+    // Method is being called when the user is resizing the window | Width and Height new Bounds of window
         @Override
         public void resize(int width, int height) {
-            world.resize(width,height); // Method is being called when the user is resizing the window
+            world.resize(width,height); 
+            ui.resize(width,height);    
             super.resize(width, height);        // adapts the Viewport resolution to new window size
         }
 
