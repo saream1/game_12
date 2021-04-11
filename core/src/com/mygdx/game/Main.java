@@ -81,8 +81,7 @@ public class Main extends ApplicationAdapter implements InputProcessor{
         // NOT USED - HANDLED IN RENDER ////////////////////////////////////////
         @Override
         public boolean keyDown(int keycode) {
-            System.out.println(keycode);
-            return true;
+            return false;
         }
 
         @Override

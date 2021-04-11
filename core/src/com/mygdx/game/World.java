@@ -132,13 +132,14 @@ public class World {
                 getCamera().translate(0, -cameraSpeed, 0);
             }
             // ZOOMING with KEYS
-            if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-                scroll(0, -1);
+            if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)){
+                if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+                    scroll(0, -1);
+                }
+                if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+                    scroll(0, 1);
+                }
             }
-            if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
-                scroll(0, 1);
-            }
-            
             // Turn Grid on/off
             if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)){
                 renderGrid = !renderGrid;

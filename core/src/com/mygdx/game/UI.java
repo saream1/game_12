@@ -123,42 +123,14 @@ public class UI {
         getUIbatch().end(); 
         ////////////////////////////////////////////////////////////////////////
         
-        // SELECTING BUILDING IS ALSO POSSIBLE BY NUM_KEYS /////////////////////
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
-            selectedBuilding = 0;
+        if(!Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)){
+            if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+                scroll(0, -1);
+            }
+            if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+                scroll(0, 1);
+            }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
-            selectedBuilding = 1;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)){
-            selectedBuilding = 2;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)){
-            selectedBuilding = 3;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)){
-            selectedBuilding = 4;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)){
-            selectedBuilding = 5;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_7)){
-            selectedBuilding = 6;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_8)){
-            selectedBuilding = 7;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_9)){
-            selectedBuilding = 8;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_0)){
-            selectedBuilding = 9;
-        }
-        if(Gdx.input.isKeyJustPressed(71)){ // KEYCODE �\?
-            selectedBuilding = 10;
-        }
-        ////////////////////////////////////////////////////////////////////////
-        
     }
     
     public void resize(int width, int height){
